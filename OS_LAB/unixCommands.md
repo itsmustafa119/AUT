@@ -47,6 +47,25 @@ rm -rfv old_backup/
 
 ---
 
+## 🧺 2.1. `rmdir` – Remove Empty Directories
+
+```bash
+rmdir [options] directory_name
+```
+
+### Options:
+| Option | Description |
+|--------|-------------|
+| `--ignore-fail-on-non-empty` | Ignore failures if directory is not empty |
+| `-p`   | Remove directory and its ancestors |
+
+### Example:
+```bash
+rmdir -p tmp/folder/subfolder
+```
+
+---
+
 ## 📄 3. `cp` – Copy Files or Directories
 
 ```bash
@@ -134,78 +153,147 @@ mkdir -pv project/{src,bin,docs}
 find [path] [options] [expression]
 ```
 
-### Common Options:
+### Options:
 | Option | Description |
 |--------|-------------|
-| `-name`       | Search by file name (supports wildcards) |
-| `-type`       | Filter by type (e.g., `f` for file, `d` for directory) |
-| `-mtime`      | Modified N days ago (negative for less than, `+` for more than) |
-| `-size`       | Search by file size (e.g., `+100M`, `-10k`) |
-| `-exec ... ;` | Execute command on each result |
+| `-name`        | Search by file name |
+| `-type`        | Search by type (`f` for file, `d` for directory) |
+| `-size`        | Search by file size (e.g. `+100M`) |
+| `-exec`        | Execute a command on each result |
+| `-mtime`       | Modified time in days ago |
+| `-perm`        | Search by file permissions |
 
 ### Example:
 ```bash
-find /home/user -type f -name "*.log" -mtime +7 -exec rm -v {} \;
+find /var -name "*.log" -size +10M -exec rm -i {} \;
 ```
 
 ---
 
-## 📍 8. `pwd` – Print Working Directory
+## 📌 8. `pwd` – Print Working Directory
 
 ```bash
 pwd
 ```
 
-### Description:
-Displays the full absolute path of the current working directory.
-
-### Example:
-```bash
-pwd
-```
+Prints the full path of the current working directory.
 
 ---
 
-## 🔄 9. `cd` – Change Directory
+## 🚪 9. `cd` – Change Directory
 
 ```bash
 cd [directory]
 ```
 
-### Examples:
+### Example:
 ```bash
-cd /etc
-cd ~     # Go to home directory
-cd ..    # Go up one directory
+cd ~/Documents/
 ```
 
 ---
 
-## 📖 10. `man` – Manual Pages
+## 📘 10. `man` – Manual Pages
 
 ```bash
 man [command]
 ```
 
-### Description:
-Shows the manual (help) pages for any command.
-
-### Example:
-```bash
-man grep
-```
+Displays the manual page for a command.
 
 ---
 
-## 🧼 11. `clear` – Clear Terminal Screen
+## 🧹 11. `clear` – Clear Terminal Screen
 
 ```bash
 clear
 ```
 
-### Description:
-Clears the terminal screen, providing a clean workspace.
+Clears all previous commands/output from the terminal view.
 
 ---
 
+## 📦 12. `tar` – Archive Utility
+
+```bash
+tar [options] archive.tar [file(s)]
+```
+
+### Options:
+| Option | Description |
+|--------|-------------|
+| `-c`   | Create new archive |
+| `-x`   | Extract files from archive |
+| `-v`   | Verbose (list files being processed) |
+| `-f`   | Use archive file name |
+| `-z`   | Compress with gzip |
+| `-j`   | Compress with bzip2 |
+
+### Example:
+```bash
+tar -czvf archive.tar.gz folder/
+```
+
+---
+
+## 📊 13. `ps` – Process Status
+
+```bash
+ps [options]
+```
+
+### Options:
+| Option | Description |
+|--------|-------------|
+| `-e` or `-A` | Show all processes |
+| `-f`   | Full format listing |
+| `-u`   | Show processes for a specific user |
+| `-x`   | Include processes without a controlling terminal |
+
+### Example:
+```bash
+ps aux | grep firefox
+```
+
+---
+
+## 🛑 14. `kill` – Terminate Processes
+
+```bash
+kill [options] PID
+```
+
+### Options:
+| Option | Description |
+|--------|-------------|
+| `-9`   | Forcefully terminate a process |
+| `-l`   | List all signal names |
+| `-s`   | Send a specific signal |
+
+### Example:
+```bash
+kill -9 1234
+```
+
+---
+
+## 📄 15. `awk` – Pattern Scanning and Processing
+
+```bash
+awk [program] [file]
+```
+
+### Common Uses:
+| Pattern | Description |
+|---------|-------------|
+| `'{print $1}'` | Print the first column of each line |
+| `'/error/'`    | Match lines containing "error" |
+| `'{sum += $1} END {print sum}'` | Sum all values in the first column |
+
+### Example:
+```bash
+awk '{print $1, $3}' access.log
+```
+
+---
 
